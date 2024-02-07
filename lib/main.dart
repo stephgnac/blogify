@@ -1,119 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:raoul_product/pages/blogs.dart';
 
-void main() => runApp(Myapp());
+void main() {
+  runApp(const MyApp());
+}
 
-class Myapp extends StatelessWidget{
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Blogify',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: const MyHomePage(),
     );
-
   }
 }
 
-class SplashScreen extends StatelessWidget {
-  get poppins => null;
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // Utilisez FutureBuilder pour créer un délai de 3 secondes
-    return FutureBuilder(
-      future: Future.delayed(Duration(seconds: 3)),
-      builder: (context, snapshot) {
-        // Vérifiez si la durée est écoulée
-        if (snapshot.connectionState == ConnectionState.done) {
-          // Si c'est le cas, naviguez vers la page principale
-          return MyHomePage();
-        } else {
-          // Sinon, affichez l'écran de démarrage
-          return Scaffold(
-            backgroundColor: Colors.green,
-            body: Center(
-              child: Container(
-                  padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    border: Border.all(
-                      color: Colors.green,
-                    ),
-                  ),
-                  child:Text("Blogify",
-                    style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.green,
-                      backgroundColor: Colors.white,
-                      fontFamily: poppins,
-                    ),
-                  )
-              ),
-
-            ),
-          );
-        }
-      },
-    );
-  }
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-
-class MyHomePage extends StatelessWidget {
-  get poppins => null;
-
-  get childreen => null;
-
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     body: Container(
-      child: ListView(
-        children: [
-          Align(
-            child: Text('Blogify',
-              style:TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
-              ) ,
+      body: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: const MaterialStatePropertyAll(Color(0xFF018e49)),
+          shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)))
+        ),
+          onPressed: () {
+
+            Navigator.push(
+                context, 
+                MaterialPageRoute(builder: (context) => const Blogs())
+            );
+          }, 
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFF018e49),
+            ),
+
+            child: Center(
+              child: Image.asset("assets/images/blogiffy.png", width: 250,),
             ),
           ),
-          TextButton(
-              onPressed: (){
-
-              }
-              ,
-              child: Text("Connexion",
-                  style: TextStyle(
-                      fontSize: 40,
-                      backgroundColor: Colors.white,
-                      color: Colors.black
-
-                  ),
-                  textScaleFactor: 1)
-          ),
-          TextButton(
-              onPressed: (){
-
-              }
-              ,
-              child: Text('Inscription',
-                  style: TextStyle(
-                  fontSize: 40,
-                  backgroundColor: Colors.white,
-                  color: Colors.black
-
-              ),)
-          ),
-
-        ],
       ),
-
-     ),
     );
-
   }
-
 }
